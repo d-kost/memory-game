@@ -10,12 +10,12 @@ export default class Board {
     this.rowCount = rowCount
   }
 
-  getCards(): Card[] {
+  getUniqueCards(): Card[] {
     let uniqCount: number = this.rowCount ** 2 / 2
     if (!Number.isInteger(uniqCount)) {
       return []
     }
-    console.log(uniqCount)
+
     let result = []
     for (let i = 0; i < uniqCount; i++) {
       const card: Card = {
@@ -24,7 +24,13 @@ export default class Board {
       }
       result.push(card)
     }
+    return result
+  }
 
+  getCards(): Card[] {
+    let cards = this.getUniqueCards()
+    let result = [...cards, ...cards]
+    result.sort(() => (Math.random() > 0.5 ? 1 : -1))
     return result
   }
 }

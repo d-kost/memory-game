@@ -8,7 +8,7 @@ export const cardsSlice = createSlice({
   initialState,
   reducers: {
     setup: (state, action: PayloadAction<Card[]>) => {
-      return state.concat(action.payload)
+      return (state = action.payload)
     },
   },
 })
