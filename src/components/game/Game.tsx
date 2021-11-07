@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import { RootState } from '../../store/store'
+import { RootState, useAppDispatch } from '../../store/store'
 import Grid from '../layout/Grid'
 import Card from '../cards/Card'
 import { useSelector } from 'react-redux'
+import { clearTimer } from '../timer/timerSlice'
 
 type GameProps = {
   colCount: number
@@ -11,6 +12,7 @@ type GameProps = {
 const Game: React.FC<GameProps> = ({ colCount }) => {
   const cards = useSelector((state: RootState) => state.game.cards)
   const flipped = useSelector((state: RootState) => state.game.flipped)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const checkWin = () => {
@@ -22,6 +24,7 @@ const Game: React.FC<GameProps> = ({ colCount }) => {
     }
     if (checkWin()) {
       console.log('win')
+      dispatch(clearTimer())
     }
   }, [cards, flipped])
 

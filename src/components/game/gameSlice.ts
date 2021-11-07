@@ -17,25 +17,28 @@ const initialState: SliceType = {
   flipped: [-1, -1],
 }
 
-export const setupCardsData = createAsyncThunk<ICard[], ICard[]>(
-  'game/setupCardsData',
-  async (cards) => {
-    try {
-      let result = await IconApi.loadIcons(cards.length / 2)
-      let icons = result.map((item) => item.default)
-
-      return cards.map((card) => {
-        return {
-          ...card,
-          icon: icons[card.id],
-        }
-      })
-    } catch (e) {
-      alert('Cannot fetch icons')
-      return []
-    }
+export const setupCardsData = createAsyncThunk<
+  ICard[],
+  ICard[],
+  {
+    rejectValue: string
   }
-)
+>('game/setupCardsData', async (cards, { rejectWithValue }) => {
+  try {
+    let result = await IconApi.loadIcons(cards.length / 2)
+    let icons = result.map((item) => item.default)
+
+    return cards.map((card) => {
+      return {
+        ...card,
+        icon: icons[card.id],
+      }
+    })
+  } catch (e) {
+    console.error('Error:', e)
+    return rejectWithValue('Cannot fetch icons')
+  }
+})
 
 export const gameSlice = createSlice({
   name: 'game',

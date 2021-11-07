@@ -2,9 +2,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import gameReducer from '../components/game/gameSlice'
 import { useDispatch } from 'react-redux'
 import { matchMiddleware } from './middleware'
+import timerReducer from '../components/timer/timerSlice'
 
 const rootReducer = combineReducers({
   game: gameReducer,
+  timer: timerReducer,
 })
 
 const store = configureStore({
