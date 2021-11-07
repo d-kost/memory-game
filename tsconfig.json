@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "jsx": "react",
-    "module": "es6",
+    "module": "commonjs",
     "rootDir": "./",
     "moduleResolution": "node",
     "allowJs": true,
@@ -13,5 +13,7 @@
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src/**/*", "assets/**/*"],
+  "files": ["custom.d.ts"]
 }
