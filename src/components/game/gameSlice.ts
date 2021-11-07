@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit'
 import { ICard } from '../../common/Board'
 
 type SliceType = {
@@ -28,27 +28,14 @@ export const gameSlice = createSlice({
         state.flipped[1] = action.payload
       }
     },
-    match: (state, action: PayloadAction<number>) => {
-      // console.log('match', state.flipped[0], state.flipped[1])
-      // if (state.flipped[0] < 0 || state.flipped[1] < 0) {
-      //   return
-      // }
-      // const card1 = state.cards[state.flipped[0]]
-      // const card2 = state.cards[state.flipped[1]]
-      // if (card1.id === card2.id) {
-      //   state.cards[state.flipped[0]].removed = true
-      //   state.cards[state.flipped[1]].removed = true
-      // }
-      // state.flipped = [-1, -1]
-    },
     closeAll: (state) => {
       state.flipped = [-1, -1]
     },
   },
 })
 
-console.log('gameSlice', gameSlice)
+export const match = createAction<number>('game/match')
 
-export const { setup, flip, match, closeAll } = gameSlice.actions
+export const { setup, flip, closeAll } = gameSlice.actions
 
 export default gameSlice.reducer
