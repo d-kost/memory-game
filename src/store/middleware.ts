@@ -1,6 +1,6 @@
 import { Middleware } from '@reduxjs/toolkit'
 import { RootState } from './store'
-import { match, closeAll } from '../components/game/gameSlice'
+import { match, removeCards, closeAll } from '../components/game/gameSlice'
 
 export const matchMiddleware: Middleware<{}, RootState> =
   (store) => (next) => (action) => {
@@ -23,6 +23,7 @@ export const matchMiddleware: Middleware<{}, RootState> =
     }
 
     setTimeout(() => {
+      store.dispatch(removeCards())
       store.dispatch(closeAll())
     }, 1000)
 

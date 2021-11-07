@@ -28,6 +28,14 @@ export const gameSlice = createSlice({
         state.flipped[1] = action.payload
       }
     },
+    removeCards: (state) => {
+      if (
+        state.cards[state.flipped[0]].id === state.cards[state.flipped[1]].id
+      ) {
+        state.cards[state.flipped[0]].removed = true
+        state.cards[state.flipped[1]].removed = true
+      }
+    },
     closeAll: (state) => {
       state.flipped = [-1, -1]
     },
@@ -36,6 +44,6 @@ export const gameSlice = createSlice({
 
 export const match = createAction<number>('game/match')
 
-export const { setup, flip, closeAll } = gameSlice.actions
+export const { setup, flip, removeCards, closeAll } = gameSlice.actions
 
 export default gameSlice.reducer
