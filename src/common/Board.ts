@@ -1,5 +1,5 @@
-export type Card = {
-  key: number
+export interface ICard {
+  id: number
   removed: boolean
 }
 
@@ -10,7 +10,7 @@ export default class Board {
     this.rowCount = rowCount
   }
 
-  getUniqueCards(): Card[] {
+  getUniqueCards(): ICard[] {
     let uniqCount: number = this.rowCount ** 2 / 2
     if (!Number.isInteger(uniqCount)) {
       return []
@@ -18,8 +18,8 @@ export default class Board {
 
     let result = []
     for (let i = 0; i < uniqCount; i++) {
-      const card: Card = {
-        key: i,
+      const card: ICard = {
+        id: i,
         removed: false,
       }
       result.push(card)
@@ -27,7 +27,7 @@ export default class Board {
     return result
   }
 
-  getCards(): Card[] {
+  getCards(): ICard[] {
     let cards = this.getUniqueCards()
     let result = [...cards, ...cards]
     result.sort(() => (Math.random() > 0.5 ? 1 : -1))

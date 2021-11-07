@@ -1,14 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit'
-import cardsReducer from '../components/cards/cardsSlice'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import gameReducer from '../components/game/gameSlice'
 import { useDispatch } from 'react-redux'
+import { matchMiddleware } from './middleware'
 
-const store = configureStore({
-  reducer: {
-    cards: cardsReducer,
-  },
+const rootReducer = combineReducers({
+  game: gameReducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(matchMiddleware),
+})
+
+export type RootState = ReturnType<typeof rootReducer>
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
