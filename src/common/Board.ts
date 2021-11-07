@@ -1,17 +1,22 @@
 export interface ICard {
   id: number
   removed: boolean
+  icon: string
 }
 
 export default class Board {
-  rowCount: number
+  colCount: number
 
-  constructor(rowCount: number = 6) {
-    this.rowCount = rowCount
+  constructor(colCount: number = 6) {
+    this.colCount = colCount
+  }
+
+  static getUniqCount(colCount: number): number {
+    return colCount ** 2 / 2
   }
 
   getUniqueCards(): ICard[] {
-    let uniqCount: number = this.rowCount ** 2 / 2
+    let uniqCount: number = Board.getUniqCount(this.colCount)
     if (!Number.isInteger(uniqCount)) {
       return []
     }
@@ -21,6 +26,7 @@ export default class Board {
       const card: ICard = {
         id: i,
         removed: false,
+        icon: '',
       }
       result.push(card)
     }

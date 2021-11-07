@@ -1,5 +1,11 @@
-import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  PayloadAction,
+  createAction,
+  createAsyncThunk,
+} from '@reduxjs/toolkit'
 import { ICard } from '../../common/Board'
+import IconApi from '../../common/IconApi'
 
 type SliceType = {
   cards: ICard[]
@@ -11,14 +17,30 @@ const initialState: SliceType = {
   flipped: [-1, -1],
 }
 
+export const setupCardsData = createAsyncThunk<ICard[], ICard[]>(
+  'game/setupCardsData',
+  async (cards) => {
+    try {
+      let result = await IconApi.loadIcons(cards.length / 2)
+      let icons = result.map((item) => item.default)
+
+      return cards.map((card) => {
+        return {
+          ...card,
+          icon: icons[card.id],
+        }
+      })
+    } catch (e) {
+      alert('Cannot fetch icons')
+      return []
+    }
+  }
+)
+
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setup: (state, action: PayloadAction<ICard[]>) => {
-      state.cards = action.payload
-      state.flipped = [-1, -1]
-    },
     flip: (state, action: PayloadAction<number>) => {
       if (state.flipped[0] === -1) {
         state.flipped[0] = action.payload
@@ -40,10 +62,19 @@ export const gameSlice = createSlice({
       state.flipped = [-1, -1]
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(
+      setupCardsData.fulfilled,
+      (state, action: PayloadAction<ICard[]>) => {
+        state.cards = action.payload
+        state.flipped = [-1, -1]
+      }
+    )
+  },
 })
 
 export const match = createAction<number>('game/match')
 
-export const { setup, flip, removeCards, closeAll } = gameSlice.actions
+export const { flip, removeCards, closeAll } = gameSlice.actions
 
 export default gameSlice.reducer

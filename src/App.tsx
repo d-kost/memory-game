@@ -1,6 +1,6 @@
 import React from 'react'
-import { setup } from './components/game/gameSlice'
-import { useAppDispatch, RootState } from './store/store'
+import { setupCardsData, closeAll } from './components/game/gameSlice'
+import { useAppDispatch } from './store/store'
 import Board from './common/Board'
 import Game from './components/game/Game'
 
@@ -10,13 +10,14 @@ const App: React.FC = () => {
 
   const newGame = (): void => {
     const board = new Board(COL_COUNT)
-    dispatch(setup(board.getCards()))
+    dispatch(setupCardsData(board.getCards()))
+    dispatch(closeAll())
   }
 
   return (
     <div>
       <button onClick={newGame}>new game</button>
-      <Game />
+      <Game colCount={COL_COUNT} />
     </div>
   )
 }

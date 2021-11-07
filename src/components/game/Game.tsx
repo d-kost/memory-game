@@ -4,8 +4,11 @@ import Grid from '../layout/Grid'
 import Card from '../cards/Card'
 import { useSelector } from 'react-redux'
 
-const COL_COUNT = 6
-const Game: React.FC = () => {
+type GameProps = {
+  colCount: number
+}
+
+const Game: React.FC<GameProps> = ({ colCount }) => {
   const cards = useSelector((state: RootState) => state.game.cards)
   const flipped = useSelector((state: RootState) => state.game.flipped)
 
@@ -24,7 +27,7 @@ const Game: React.FC = () => {
 
   return (
     <div>
-      <Grid colCount={COL_COUNT}>
+      <Grid colCount={colCount}>
         {cards.map((item, i) => (
           <Card
             key={i}
