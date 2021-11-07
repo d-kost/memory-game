@@ -51,6 +51,9 @@ export const gameSlice = createSlice({
       }
     },
     removeCards: (state) => {
+      if (state.flipped[0] < 0 || state.flipped[1] < 0) {
+        return
+      }
       if (
         state.cards[state.flipped[0]].id === state.cards[state.flipped[1]].id
       ) {
