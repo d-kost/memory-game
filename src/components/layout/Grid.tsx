@@ -9,7 +9,7 @@ const Grid: React.FC<BoardProps> = ({ colCount, children }) => {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: new Array(colCount).fill('100px').join(' '),
+        gridTemplateColumns: `repeat(${colCount}, 100px)`,
         gridGap: '15px',
       }}
     >

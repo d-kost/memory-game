@@ -15,6 +15,9 @@ const Card: React.FC<ICardProps> = (props) => {
   const [logo, setLogo] = useState('')
 
   const flipCard = () => {
+    if (flipped) {
+      return
+    }
     dispatch(flip(index))
     dispatch(match(index))
   }
@@ -26,26 +29,23 @@ const Card: React.FC<ICardProps> = (props) => {
   }, [])
 
   if (removed) {
-    return <div className="card card-removed"></div>
+    return <div></div>
   }
 
-  if (flipped) {
-    return (
-      <div className="card">
-        <div className="card-content">
-          <img
-            className="card-icon"
-            src={logo}
-            alt="card-icon"
-            width="50px"
-            height="50px"
-          />
-        </div>
+  return (
+    <div className={`card ${flipped ? 'card-flipped' : ''}`}>
+      <div className="card-side card-back" onClick={flipCard}></div>
+      <div className="card-side card-front">
+        <img
+          className="card-icon"
+          src={logo}
+          alt="card-icon"
+          width="50px"
+          height="50px"
+        />
       </div>
-    )
-  }
-
-  return <div className="card card-back" onClick={flipCard}></div>
+    </div>
+  )
 }
 
 export default React.memo(Card)

@@ -4,6 +4,7 @@ import Grid from '../layout/Grid'
 import Card from '../cards/Card'
 import { useSelector } from 'react-redux'
 import { stopTimer } from '../timer/timerSlice'
+import './style.css'
 
 type GameProps = {
   colCount: number
@@ -29,7 +30,7 @@ const Game: React.FC<GameProps> = ({ colCount }) => {
   }, [cards, flipped])
 
   return (
-    <div>
+    <div className="game">
       <Grid colCount={colCount}>
         {cards.map((item, i) => (
           <Card
