@@ -21,11 +21,15 @@ export const timerSlice = createSlice({
       state.timer++
     },
     clearTimer: (state) => {
+      state.timer = 0
+    },
+    stopTimer: (state) => {
       window.clearInterval(state.timerId)
     },
   },
 })
 
-export const { increase, setTimerId, clearTimer } = timerSlice.actions
+export const { increase, setTimerId, clearTimer, stopTimer } =
+  timerSlice.actions
 
 export default timerSlice.reducer

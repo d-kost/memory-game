@@ -3,7 +3,7 @@ import { RootState, useAppDispatch } from '../../store/store'
 import Grid from '../layout/Grid'
 import Card from '../cards/Card'
 import { useSelector } from 'react-redux'
-import { clearTimer } from '../timer/timerSlice'
+import { stopTimer } from '../timer/timerSlice'
 
 type GameProps = {
   colCount: number
@@ -24,7 +24,7 @@ const Game: React.FC<GameProps> = ({ colCount }) => {
     }
     if (checkWin()) {
       console.log('win')
-      dispatch(clearTimer())
+      dispatch(stopTimer())
     }
   }, [cards, flipped])
 
