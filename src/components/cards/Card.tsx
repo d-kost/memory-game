@@ -29,7 +29,7 @@ const Card: React.FC<ICardProps> = (props) => {
   }, [])
 
   if (removed) {
-    return <div></div>
+    return <div className="card-empty"></div>
   }
 
   return (

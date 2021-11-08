@@ -43,3 +43,7 @@
 .card-icon {
   display: block;
 }
+
+.card-empty {
+  height: 120px;
+}
