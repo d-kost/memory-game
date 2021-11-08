@@ -1,18 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import gameReducer from '../components/game/gameSlice'
 import { useDispatch } from 'react-redux'
-import { matchMiddleware } from './middleware'
+import { matchMiddleware, setResultMiddleware } from './middleware'
 import timerReducer from '../components/timer/timerSlice'
+import ratingReducer from '../components/rating/ratingSlice'
 
 const rootReducer = combineReducers({
   game: gameReducer,
   timer: timerReducer,
+  rating: ratingReducer,
 })
 
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(matchMiddleware),
+    getDefaultMiddleware().concat([matchMiddleware, setResultMiddleware]),
 })
 
 export type RootState = ReturnType<typeof rootReducer>

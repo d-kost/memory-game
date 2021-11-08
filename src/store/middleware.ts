@@ -1,6 +1,7 @@
 import { Middleware } from '@reduxjs/toolkit'
 import { RootState } from './store'
 import { match, removeCards, closeAll } from '../components/game/gameSlice'
+import { addResult } from '../components/rating/ratingSlice'
 
 export const matchMiddleware: Middleware<{}, RootState> =
   (store) => (next) => (action) => {
@@ -27,5 +28,16 @@ export const matchMiddleware: Middleware<{}, RootState> =
       store.dispatch(closeAll())
     }, 1000)
 
+    next(action)
+  }
+
+export const setResultMiddleware: Middleware<{}, RootState> =
+  (store) => (next) => (action) => {
+    if (action.type !== addResult.type) {
+      next(action)
+      return
+    }
+    const state = store.getState()
+    action.payload = state.timer.timer
     next(action)
   }
