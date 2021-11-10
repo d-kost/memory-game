@@ -7,6 +7,7 @@ import { stopTimer } from '../timer/timerSlice'
 import { addResult } from '../rating/ratingSlice'
 import './style.css'
 import Rating from '../rating/Rating'
+import Alert from '../layout/Alert'
 
 type GameProps = {
   colCount: number
@@ -41,7 +42,7 @@ const Game: React.FC<GameProps> = ({ colCount }) => {
     <div className="game">
       {won && (
         <>
-          <div>Победа</div>
+          <Alert>Победа</Alert>
           <Rating />
         </>
       )}

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from '../../context'
 
 type ButtonProps = {
   title: string
@@ -6,8 +7,10 @@ type ButtonProps = {
 }
 
 const Button: React.FC<ButtonProps> = ({ title, onClick }) => {
+  const context = useContext<string>(ThemeContext)
+
   return (
-    <button className="btn btn-orange" onClick={onClick}>
+    <button className={`btn btn-${context}`} onClick={onClick}>
       {title}
     </button>
   )

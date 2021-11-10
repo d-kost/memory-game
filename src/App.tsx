@@ -13,6 +13,7 @@ import {
 import Timer from './components/timer/Timer'
 import Button from './components/layout/Button'
 import Header from './components/layout/Header'
+import { ThemeContext } from './context'
 
 const COL_COUNT = 6
 const App: React.FC = () => {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
       const timerId: number = window.setInterval(() => {
         dispatch(increase())
       }, 1000)
+
       dispatch(setTimerId(timerId))
     } else {
       alert(setupResult.payload)
@@ -36,14 +38,14 @@ const App: React.FC = () => {
   }
 
   return (
-    <div>
+    <ThemeContext.Provider value="orange">
       <Header>
         <Button onClick={newGame} title="Старт" />
         <Button onClick={() => console.log('results')} title="Результаты" />
         <Timer />
       </Header>
       <Game colCount={COL_COUNT} />
-    </div>
+    </ThemeContext.Provider>
   )
 }
 

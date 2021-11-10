@@ -31,3 +31,25 @@
 .btn-orange:hover {
   background-color: #fb8332;
 }
+
+.alert {
+  font-size: 22px;
+  font-weight: 600;
+  padding: 7px 25px;
+  border-radius: 4px;
+}
+
+.alert-orange {
+  border: 2px solid #fa6400;
+  background-color: white;
+}
+
+.list {
+  width: 400px;
+}
+
+.list-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
