@@ -10,9 +10,8 @@ interface ICardProps extends ICard {
 }
 
 const Card: React.FC<ICardProps> = (props) => {
-  const { index, id, removed, flipped } = props
+  const { index, icon, removed, flipped } = props
   const dispatch = useAppDispatch()
-  const [logo, setLogo] = useState('')
 
   const flipCard = () => {
     if (flipped) {
@@ -21,12 +20,6 @@ const Card: React.FC<ICardProps> = (props) => {
     dispatch(flip(index))
     dispatch(match(index))
   }
-
-  useEffect(() => {
-    import(`../../../assets/icons/${id}.svg`).then((obj) => {
-      setLogo(obj.default)
-    })
-  }, [])
 
   if (removed) {
     return <div className="card-empty"></div>
@@ -38,7 +31,7 @@ const Card: React.FC<ICardProps> = (props) => {
       <div className="card-side card-front">
         <img
           className="card-icon"
-          src={logo}
+          src={icon}
           alt="card-icon"
           width="50px"
           height="50px"

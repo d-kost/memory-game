@@ -32,8 +32,8 @@ const Game: React.FC<GameProps> = ({ colCount }) => {
     }
     if (checkWin()) {
       setWon(true)
-      dispatch(addResult(0))
       dispatch(stopTimer())
+      dispatch(addResult(0))
     }
   }, [cards, flipped])
 
