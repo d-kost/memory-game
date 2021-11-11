@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { setupCardsData, closeAll } from './components/game/gameSlice'
 import { useAppDispatch } from './store/store'
@@ -41,7 +41,6 @@ const App: React.FC = () => {
     <ThemeContext.Provider value="orange">
       <Header>
         <Button onClick={newGame} title="Старт" />
-        <Button onClick={() => console.log('results')} title="Результаты" />
         <Timer />
       </Header>
       <Game colCount={COL_COUNT} />

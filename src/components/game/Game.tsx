@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux'
 import { stopTimer } from '../timer/timerSlice'
 import { addResult } from '../rating/ratingSlice'
 import './style.css'
-import Rating from '../rating/Rating'
-import Alert from '../layout/Alert'
+import Win from './Win'
 
 type GameProps = {
   colCount: number
@@ -36,26 +35,23 @@ const Game: React.FC<GameProps> = ({ colCount }) => {
       dispatch(stopTimer())
       dispatch(addResult(0))
     }
-  }, [cards, flipped])
+  }, [cards, dispatch, flipped])
 
   return (
     <div className="game">
-      {won && (
-        <>
-          <Alert>Победа</Alert>
-          <Rating />
-        </>
+      {won && <Win />}
+      {!won && (
+        <Grid colCount={colCount}>
+          {cards.map((item, i) => (
+            <Card
+              key={i}
+              index={i}
+              flipped={i === flipped[0] || i == flipped[1]}
+              {...item}
+            />
+          ))}
+        </Grid>
       )}
-      <Grid colCount={colCount}>
-        {cards.map((item, i) => (
-          <Card
-            key={i}
-            index={i}
-            flipped={i === flipped[0] || i == flipped[1]}
-            {...item}
-          />
-        ))}
-      </Grid>
     </div>
   )
 }

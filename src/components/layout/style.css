@@ -37,6 +37,7 @@
   font-weight: 600;
   padding: 7px 25px;
   border-radius: 4px;
+  display: inline-block;
 }
 
 .alert-orange {
@@ -51,5 +52,14 @@
 .list-row {
   display: flex;
   justify-content: space-between;
-  padding: 5px 0;
+  padding: 5px;
+  min-height: 15px;
+}
+
+.list-row:nth-child(2n+1) {
+  background-color: #ededed;
+}
+
+.list-row:hover {
+  background-color: #f7f7f7;
 }
