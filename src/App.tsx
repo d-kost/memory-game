@@ -15,7 +15,7 @@ import Button from './components/layout/Button'
 import Header from './components/layout/Header'
 import { ThemeContext } from './context'
 
-const COL_COUNT = 4
+const COL_COUNT = 6
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
 
