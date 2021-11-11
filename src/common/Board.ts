@@ -7,7 +7,7 @@ export interface ICard {
 export default class Board {
   colCount: number
 
-  constructor(colCount: number = 6) {
+  constructor(colCount = 6) {
     this.colCount = colCount
   }
 
@@ -16,12 +16,12 @@ export default class Board {
   }
 
   getUniqueCards(): ICard[] {
-    let uniqCount: number = Board.getUniqCount(this.colCount)
+    const uniqCount: number = Board.getUniqCount(this.colCount)
     if (!Number.isInteger(uniqCount)) {
       return []
     }
 
-    let result = []
+    const result = []
     for (let i = 0; i < uniqCount; i++) {
       const card: ICard = {
         id: i,
@@ -34,8 +34,8 @@ export default class Board {
   }
 
   getCards(): ICard[] {
-    let cards = this.getUniqueCards()
-    let result = [...cards, ...cards]
+    const cards = this.getUniqueCards()
+    const result = [...cards, ...cards]
     result.sort(() => (Math.random() > 0.5 ? 1 : -1))
     return result
   }

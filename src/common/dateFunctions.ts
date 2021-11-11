@@ -4,6 +4,6 @@ export const getFormatDate = (timestamp: number): string => {
 }
 
 export const getFormatSeconds = (seconds: number): string => {
-  var date = new Date(seconds * 1000)
+  const date = new Date(seconds * 1000)
   return date.toISOString().substr(11, 8)
 }

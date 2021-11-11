@@ -25,8 +25,8 @@ export const setupCardsData = createAsyncThunk<
   }
 >('game/setupCardsData', async (cards, { rejectWithValue }) => {
   try {
-    let result = await IconApi.loadIcons(cards.length / 2)
-    let icons = result.map((item) => item.default)
+    const result = await IconApi.loadIcons(cards.length / 2)
+    const icons = result.map((item) => item.default)
 
     return cards.map((card) => {
       return {
