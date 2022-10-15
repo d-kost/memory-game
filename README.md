@@ -1,3 +1,3 @@
 ## Memory Game
 
-Demo: https://daria-kostuchenko.github.io/memory-game/dist/index.html
+Demo: https://d-kost.github.io/memory-game/dist/index.html
